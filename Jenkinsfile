@@ -15,13 +15,9 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh "mvn test -f ES_Proj_BOMBardEIRO"
+                sh 'mvn -f esp11/ test'
             }
         }
-        stage('package') {
-            steps {
-                sh "mvn package -f ES_Proj_BOMBardEIRO"
-            }
-        }
-    }
+   }
+
 }

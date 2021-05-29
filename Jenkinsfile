@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('git repo & clean') {
             steps {
-                sh "rmdir  /s /q ES_Proj_BOMBardEIRO"
+              //  sh "rmdir  /s /q ES_Proj_BOMBardEIRO"
                 sh "https://github.com/rubenmenino/ES_Proj_BOMBardEIRO.git"
                 sh "mvn clean -f ES_Proj_BOMBardEIRO"
             }

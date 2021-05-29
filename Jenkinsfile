@@ -8,9 +8,9 @@ pipeline {
            //     sh "mvn clean -f ES_Proj_BOMBardEIRO"
          //   }
       //  }
-        stage('install') {
+        stage('Build') {
             steps {
-                sh "mvn install -f ES_Proj_BOMBardEIRO"
+                sh 'mvn -f esp11/pom.xml -B -DskipTests clean package'
             }
         }
         stage('test') {

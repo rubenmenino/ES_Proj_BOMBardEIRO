@@ -23,7 +23,7 @@ pipeline {
 
         stage('Deploy') {
             steps{
-                sh 'mvn deploy -f ./esp11/pom.xml -s settings.xml'
+                sh sh 'mvn -f esp11/pom.xml -B -DskipTests clean package'
             }
 
         }

@@ -1,23 +1,33 @@
 pipeline {
     agent any
     stages {
-       // stage('git repo & clean') {
-         //   steps {
-              //  sh "rmdir  /s /q ES_Proj_BOMBardEIRO"
-            //    sh "https://github.com/rubenmenino/ES_Proj_BOMBardEIRO.git"
-           //     sh "mvn clean -f ES_Proj_BOMBardEIRO"
-         //   }
-      //  }
+        stage('Start') {
+            steps{
+                dir('esp11'){
+                    sh '''
+                        echo "PATH = ${PATH}"
+                        echo "M2_HOME = ${M2_HOME}"
+                        '''
+                }
+            }
+
+        }
         stage('Build') {
-            steps {
-                sh 'mvn -f esp11/pom.xml -B -DskipTests clean package'
+            steps{
+                dir('esp11'){
+                    sh 'mvn -Dmaven.test.failure.ignore=true install'
+                }
             }
+
         }
-        stage('test') {
-            steps {
-                sh 'mvn -f esp11/ test'
+
+        stage('Deploy') {
+            steps{
+                sh 'mvn deploy -f ./esp11/pom.xml -s settings.xml'
             }
+
         }
+
    }
 
 }

@@ -23,7 +23,7 @@ pipeline {
 
         stage('Deploy') {
             steps{
-                sh sh 'mvn -f esp11/pom.xml -B -DskipTests clean package'
+                sh 'mvn -f esp11/pom.xml -B -DskipTests clean package'
             }
 
         }

@@ -25,8 +25,21 @@ pipeline {
             steps{
                 sh 'mvn -f esp11/pom.xml -B -DskipTests clean package'
             }
-
         }
+
+        stages {
+           stage('docker-compose') {
+               steps {
+                  sh "docker-compose build"
+                  sh "docker-compose up -d"
+               }
+           }
+        }
+       post {
+          always {
+             sh "docker-compose down || true"
+          }
+       }
 
    }
 

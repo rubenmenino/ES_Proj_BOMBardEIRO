@@ -69,8 +69,34 @@ gps = firefighters['a1']['gps'] + firefighters['a1']['env'] + firefighters['a1']
 
 new = sorted(gps, key = lambda i: i['date']) 
 pprint.pprint(new)
+# producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
+# # Asynchronous by default
+# future = producer.send('', b'raw_bytes')
 
+# # Block for 'synchronous' sends
+# try:
+#     record_metadata = future.get(timeout=10)
+# except KafkaError:
+#     # Decide what to do if produce request failed...
+#     log.exception()
+#     pass
+
+# # Successful result returns assigned partition and offset
+# print (record_metadata.topic)
+# print (record_metadata.partition)
+# print (record_metadata.offset)
+
+# produce json messages
+# for firefighter in firefighters.keys():
+#     for value in firefighters[firefighter]['gps']:
+#         value['fighterID'] = firefighter
+#         value['type'] = 'gps'
+#         producer.send('fighters', value)
+#         print('Produced information to topic firefighters')
+#         time.sleep(1)
+
+#producer = KafkaProducer(bootstrap_servers=['192.168.160.103:9092'],value_serializer=lambda m: json.dumps(m).encode('ascii'))
 producer = KafkaProducer(bootstrap_servers=['localhost:9092:9092'],value_serializer=lambda m: json.dumps(m).encode('ascii'))
 for item in new:
    if item['type'] == 'gps':
@@ -81,7 +107,19 @@ for item in new:
        producer.send('esp11_hr', item)
    pprint.pprint(item)
    time.sleep(0.04)
+# for item in new:
+#     if item['type'] == 'gps':
+#         producer.send('gps', item)
+#     elif item['type'] == 'env':
+#         producer.send('env', item)
+#     elif item['type'] == 'hr':
+#         producer.send('hr', item)
+#     pprint.pprint(item)
+#     time.sleep(0.04)
 
+# # produce asynchronously
+# for _ in range(100):
+#     producer.send('Flights', b'msg')
 
 def on_send_success(record_metadata):
     print(record_metadata.topic)
@@ -91,6 +129,9 @@ def on_send_success(record_metadata):
 def on_send_error(excp):
     log.error('I am an errback', exc_info=excp)
     # handle exception
+
+# produce asynchronously with callbacks
+#producer.send('Flights', b'raw_bytes').add_callback(on_send_success).add_errback(on_send_error)
 
 # block until all async messages are sent
 producer.flush()

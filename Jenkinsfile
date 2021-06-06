@@ -1,45 +1,23 @@
 pipeline {
     agent any
     stages {
-        stage('Start') {
-            steps{
-                dir('esp11'){
-                    sh '''
-                        echo "PATH = ${PATH}"
-                        echo "M2_HOME = ${M2_HOME}"
-                        '''
-                }
-            }
-
-        }
+       // stage('git repo & clean') {
+         //   steps {
+              //  sh "rmdir  /s /q ES_Proj_BOMBardEIRO"
+            //    sh "https://github.com/rubenmenino/ES_Proj_BOMBardEIRO.git"
+           //     sh "mvn clean -f ES_Proj_BOMBardEIRO"
+         //   }
+      //  }
         stage('Build') {
-            steps{
-                dir('esp11'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true install'
-                }
-            }
-
-        }
-
-        stage('Deploy') {
-            steps{
+            steps {
                 sh 'mvn -f esp11/pom.xml -B -DskipTests clean package'
             }
         }
-
-
-       stage('docker-compose') {
-           steps {
-              sh "docker-compose build"
-              sh "docker-compose up -d"
-           }
-       }
-
-   }
-   post {
-     always {
-        sh "docker-compose down || true"
-     }
+        stage('test') {
+            steps {
+                sh 'mvn -f esp11/ test'
+            }
+        }
    }
 
 }

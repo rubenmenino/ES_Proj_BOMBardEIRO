@@ -189,48 +189,6 @@ public class Controller {
 
     }
 
-    @GetMapping("/dashboard")
-    public String dashBoard() throws JsonProcessingException {
 
-        ObjectMapper mapper = new ObjectMapper();
-        List<String> actual = new ArrayList<>();
-        for (int i = 0; i < array.length;i++) {
-
-            List<FighterENV> env = repo_env.findByName(array[i]);
-            FighterENV[] arrayEnv = new FighterENV[env.size()];
-            arrayEnv = env.toArray(arrayEnv);
-            List<FighterENV> tmpE = new ArrayList<>();
-            int tmp = 0;
-            for(int j = 0; j < env.size()-1;j++){
-                int date = Integer.parseInt(arrayEnv[j].getDate());
-                if(date >= tmp){
-                    tmp = date + 300;
-                    tmpE.add(arrayEnv[j]);
-                }
-            }
-            List<FighterHR> hr = repo_hr.findByName(array[i]);
-            FighterHR[] arrayHr = new FighterHR[hr.size()];
-            arrayHr = hr.toArray(arrayHr);
-            List<FighterHR> tmpH = new ArrayList<>();
-            tmp = 0;
-            for(int j = 0; j < hr.size()-1;j++){
-                int date = Integer.parseInt(arrayHr[j].getDate());
-                if(date >= tmp){
-                    tmp = date + 300;
-                    tmpH.add(arrayHr[j]);
-                }
-            }
-            HashMap<String, Object> board = new HashMap<String, Object>();
-
-            board.put("env", tmpE);
-            board.put("hr", tmpH);
-            board.put("id", array[i]);
-            actual.add(mapper.writeValueAsString(board));
-        }
-        Object[] arr2 = actual.toArray();
-        String send = Arrays.toString(arr2);
-
-        return send;
-    }
 
 }

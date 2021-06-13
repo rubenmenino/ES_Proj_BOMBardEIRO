@@ -10,6 +10,7 @@ pipeline {
                 )
                 sh "chmod +x -R ${env.WORKSPACE}"
         }
+        }
             
         stage('Start') {
             steps{

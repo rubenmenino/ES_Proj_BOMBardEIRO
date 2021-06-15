@@ -70,6 +70,14 @@ const dashboardRoutes = [
     component: Notifications,
     layout: "/admin",
   },
+
+  {
+    path: "/test",
+    name: "test",
+    icon: "nc-icon nc-bell-55",
+    component: Notifications,
+    layout: "/admin",
+  },
 ];
 
 export default dashboardRoutes;

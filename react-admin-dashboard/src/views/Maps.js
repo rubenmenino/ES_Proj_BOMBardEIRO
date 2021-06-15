@@ -1,20 +1,26 @@
-import React, {useState} from 'react';
-import ReactMapGL from 'react-map-gl';
+import React, {useState, useRef} from 'react';
+import ReactMapGL, { Marker } from 'react-map-gl';
+import useSwr from 'swr'
+import "./App.css";
 
+const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 
 export default function Maps() {
-  let [viewport, setViewport] = useState({
-    latitude: 39.3999,
-    longitude: -8.224454,
+  const [viewport, setViewport] = useState({
+    latitude: 40.063888,
+    longitude: -8.16133948,
     width: window.innerWidth,
     height: window.innerHeight,
     zoom: 10
   });
+  const mapRef = useRef();
 
+  const url = 
+      "http://localhost:8091/fighters/gps";
 
-
-
+  const {data, error} = useSwr(url, fetcher);
+  const bombeirosGPS = data && !error ? data.slice(0,100) : [];
 
   return (
 
@@ -27,7 +33,18 @@ export default function Maps() {
         onViewportChange={(newView) => setViewport(newView)}
         >
           
-           markers here
+           {bombeirosGPS.map(gps => (
+             <Marker
+                key={gps.id}
+                latitude={gps.gps_tag_lat}
+                longitude={gps.gps_tag_long}
+
+              >
+                <button className="crime-marker">
+                  <img src="/fire.svg" alt="fire" />
+                </button>
+              </Marker>
+           ))}
         </ReactMapGL>
       </div>
 

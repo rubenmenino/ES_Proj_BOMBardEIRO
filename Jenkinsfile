@@ -13,6 +13,7 @@ pipeline {
     environment {
             bombeiros_image = ''
             react_image = ''
+            python_image = ''
     	}
 
 
@@ -43,6 +44,18 @@ pipeline {
                 sh 'mvn -f esp11/pom.xml -B -DskipTests clean package'
             }
         }
+
+        stage("Publish python_image to RegistryVM"){
+                    steps{
+                        script{
+                            python_image = docker.build("esp11/python_image", "./Data")
+                            docker.withRegistry("http://192.168.160.48:5000") {
+                                python_image.push();
+                            }
+                        }
+                        sh "docker images"
+                    }
+                }
 
          stage("Publish bombeiros_image to RegistryVM"){
             steps{

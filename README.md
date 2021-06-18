@@ -1,9 +1,15 @@
 # ES_Proj_BOMBardEIRO
 https://rubenmenino.github.io/rubenmenino.github.io_ES-projeto-BOMBardEIRO/
 
+# **Start python script**
+1. cd Data
+2. docker build -t pythonscript .
+3. docker image
+4. docker run "image id" que lá aparece
 
-
-
+# **Run Spring boot app**
+1. cd esp11
+2. mvn spring-boot:run
 
 # **Start docker**
 1. cd react-admin-dashboard

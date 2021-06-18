@@ -82,6 +82,22 @@ pipeline {
         }
 
 
+        stage('Deploying esp11 in PlayGroundVM ') {
+                    steps {
+                        withCredentials([usernamePassword(credentialsId: 'esp11bombeiros', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                            script {
+                                remote.user = USERNAME
+                                remote.password = PASSWORD
+                                remote.allowAnyHosts = true
+                            }
+                            sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp11/bombeiros_image"
+                            sshCommand remote: remote, command: "docker create -p 11001:8091 --name esp11_bombeiros 192.168.160.48:5000/esp11/bombeiros_image"
+                            sshCommand remote: remote, command: "docker start esp11_bombeiros"
+                        }
+                    }
+                }
+
+
    }
    
 

@@ -16,8 +16,6 @@
 
 */
 import Dashboard from "views/Dashboard.js";
-import UserProfile from "views/UserProfile.js";
-import Typography from "views/Typography.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import ListFireComponent from "views/ListFireComponent.js"
@@ -41,22 +39,6 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/user",
-    name: "User Profile",
-    icon: "nc-icon nc-circle-09",
-    component: UserProfile,
-    layout: "/admin",
-  },
-
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-paper-2",
-    component: Typography,
-    layout: "/admin",
-  },
-
-  {
     path: "/maps",
     name: "Maps",
     icon: "nc-icon nc-pin-3",
@@ -66,14 +48,6 @@ const dashboardRoutes = [
   {
     path: "/notifications",
     name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Notifications,
-    layout: "/admin",
-  },
-
-  {
-    path: "/test",
-    name: "test",
     icon: "nc-icon nc-bell-55",
     component: Notifications,
     layout: "/admin",

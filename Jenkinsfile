@@ -56,6 +56,19 @@ pipeline {
             }
         }
 
+        stage("Publish react_image to RegistryVM"){
+            steps{
+                script{
+                    react_image = docker.build("esp11/react_image", "./react-admin-dashboard")
+                    docker.withRegistry("http://192.168.160.48:5000") {
+                        react_image.push();
+                    }
+                }
+                sh "docker images"
+            }
+        }
+
+
    }
    
 

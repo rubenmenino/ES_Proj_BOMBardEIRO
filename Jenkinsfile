@@ -82,7 +82,7 @@ pipeline {
                     sshCommand remote: remote, command: "docker rm esp11_bombeiros"
                     sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp11/bombeiros_image"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp11/bombeiros_image"
-                    sshCommand remote: remote, command: "docker create -p 11002:8091 --name esp11_bombeiros 192.168.160.48:5000/esp11/bombeiros_image"
+                    sshCommand remote: remote, command: "docker create -p 11001:8091 --name esp11_bombeiros 192.168.160.48:5000/esp11/bombeiros_image"
                     sshCommand remote: remote, command: "docker start esp11_bombeiros"
                 }
             }
@@ -100,7 +100,7 @@ pipeline {
                             sshCommand remote: remote, command: "docker rm react"
                             sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp11/react_image"
                             sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp11/react_image"
-                            sshCommand remote: remote, command: "docker create -p 11003:3000 --name react 192.168.160.48:5000/esp11/react_image"
+                            sshCommand remote: remote, command: "docker create -p 11002:3000 --name react 192.168.160.48:5000/esp11/react_image"
                             sshCommand remote: remote, command: "docker start react"
                         }
                     }

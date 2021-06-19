@@ -70,8 +70,8 @@ gps = firefighters['a1']['gps'] + firefighters['a1']['env'] + firefighters['a1']
 new = sorted(gps, key = lambda i: i['date']) 
 pprint.pprint(new)
 
-
-
+# 192.168.160.18:19092
+# localhost:9092
 producer = KafkaProducer(bootstrap_servers=['192.168.160.18:19092'],value_serializer=lambda m: json.dumps(m).encode('ascii'))
 for item in new:
    if item['type'] == 'gps':

@@ -44,7 +44,17 @@ pipeline {
             }
         }
 
-
+        stage("Publish python image to RegistryVM"){
+            steps{
+                script{
+                    python_image = docker.build("esp11/python_image", "./Data")
+                    docker.withRegistry("http://192.168.160.48:5000") {
+                        python_image.push();
+                    }
+                }
+                sh "docker images"
+            }
+        }
 
          stage("Publish bombeiros_image to RegistryVM"){
             steps{

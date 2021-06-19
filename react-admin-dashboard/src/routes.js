@@ -52,6 +52,7 @@ const dashboardRoutes = [
     component: Notifications,
     layout: "/admin",
   },
+
 ];
 
 export default dashboardRoutes;

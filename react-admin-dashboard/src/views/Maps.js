@@ -42,7 +42,6 @@ export default function Maps() {
                     >
                         <button className="crime-marker">
                             <img src="/fire.svg" alt="fire" />
-                            <p>qq</p>
                         </button>
                     </Marker>
                 ))}

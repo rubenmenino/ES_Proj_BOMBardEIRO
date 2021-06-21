@@ -15,9 +15,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Dashboard from "views/Dashboard.js";
+
 import Maps from "views/Maps.js";
-import Notifications from "views/Notifications.js";
 import ListFireComponent from "views/ListFireComponent.js"
 
 
@@ -31,13 +30,7 @@ const dashboardRoutes = [
     component: ListFireComponent,
     layout: "/admin",
   },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "nc-icon nc-chart-pie-35",
-    component: Dashboard,
-    layout: "/admin",
-  },
+
   {
     path: "/maps",
     name: "Maps",
@@ -45,13 +38,7 @@ const dashboardRoutes = [
     component: Maps,
     layout: "/admin",
   },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Notifications,
-    layout: "/admin",
-  },
+
 
 ];
 
